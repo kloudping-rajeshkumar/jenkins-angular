@@ -1,0 +1,45 @@
+{
+    "data" : [
+        {
+          "createdOn": "16 June 2022",
+          "invoiceto": "Barbara Moore",
+          "amount":"$5200"
+        },
+        {
+          "createdOn": "18 June 2022",
+          "invoiceto": "Karlene Chaidez",
+          "amount":"$3800"
+        },
+        {
+          "createdOn": "20 June 2022",
+          "invoiceto": "Russell Copeland",
+          "amount":"$1800"
+        },
+        {
+          "createdOn": "21 June 2022",
+          "invoiceto": "Joseph Collins",
+          "amount":"$4800"
+        },
+        {
+          "createdOn": "23 June 2022",
+          "invoiceto": "Jennifer Floyd",
+          "amount":"$6200"
+        },
+        {
+          "createdOn": "26 June 2022",
+          "invoiceto": "Leatha Bailey",
+          "amount":"$3200"
+        },
+        {
+          "createdOn": "27 June 2022",
+          "invoiceto": "Alex Canpbell",
+          "amount":"$4300"
+        },
+        {
+          "createdOn": "30 June 2022",
+          "invoiceto": "Marie Canales",
+          "amount":"$6200"
+        }
+      ],
+      "totalData":8
+}

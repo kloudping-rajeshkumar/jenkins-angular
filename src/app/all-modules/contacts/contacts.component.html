@@ -1,0 +1,966 @@
+<div>
+  <div class="page-wrapper">
+      <!-- Page Content -->
+      <div class="content container-fluid">
+          <div class="crms-title row bg-white">
+              <div class="col">
+                  <h3 class="page-title m-0"> <span class="page-title-icon bg-gradient-primary text-white me-2"> <i class="feather icon-smartphone"></i> </span> Contacts </h3>
+              </div>
+              <div class="col text-end">
+                  <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+                      <li class="breadcrumb-item"> <a [routerLink]="routes.dealsDashboard">Dashboard</a> </li>
+                      <li class="breadcrumb-item active">Contacts</li>
+                  </ul>
+              </div>
+          </div> <!-- Page Header -->
+          <div class="page-header pt-3 mb-0">
+              <div class="row">
+                  <div class="col">
+                      <div class="dropdown"> <a class="dropdown-toggle recently-viewed" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{filterValue}}</a>
+                          <div class="dropdown-menu"> <a class="dropdown-item" href="javascript:void(0);" (click)="filterValue='All Contacts';onFilterd();">All Contacts</a> <a class="dropdown-item" href="javascript:void(0);" (click)="filterValue='Recently Viewed';onFilterd();">Recently Viewed</a> <a class="dropdown-item" href="javascript:void(0);" (click)="filterValue='Items I am following';onFilterd();">Items I am following</a> <a class="dropdown-item" href="javascript:void(0);" (click)="filterValue='Contacts added in the last 24 hours';onFilterd();">Contacts added in the last 24 hours</a> <a class="dropdown-item" href="javascript:void(0);" (click)="filterValue='Contacts added in the last 7 days';onFilterd();">Contacts added in the last 7 days</a> </div>
+                      </div>
+                  </div>
+                  <div class="col text-end">
+                      <ul class="list-inline-item ps-0">
+                          <li class="list-inline-item"> <button class="btn btn-primary btn-sm me-1" id="add-task" data-bs-toggle="modal" data-bs-target="#add_contact" #addclosebutton (click)="resetform()" aria-label="Close"> New Contact </button> </li>
+                      </ul>
+                  </div>
+              </div>
+          </div> <!-- /Page Header -->
+          <!-- Content Starts -->
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card mb-0">
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <div class="table_header">
+                                  <div class="row">
+                                      <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length"> <label> Show <select [(ngModel)]="pageSize" (ngModelChange)="PageSize()" class="form-control form-control-sm">
+                                                      <option value="10">10</option>
+                                                      <option value="25">25</option>
+                                                      <option value="50">50</option>
+                                                      <option value="100">100</option>
+                                                  </select> entries </label> </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12 col-md-12">
+                                          <div class="dataTables_filter"> <label> <input type="search" [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" placeholder="search..." class="form-control form-control-sm" /> </label> </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <table matSort (matSortChange)="sortData($event)" class="table table-striped table-nowrap custom-table mb-0 datatable dataTable no-footer">
+                                  <thead>
+                                      <tr>
+                                          <th> Sno. </th>
+                                          <th mat-sort-header="fisrtname">Full Name</th>
+                                          <th mat-sort-header="organization">Company Name</th>
+                                          <th mat-sort-header="title">Title</th>
+                                          <th mat-sort-header="whatsApp">WhatsApp 
+                                            <i class="fa fa-whatsapp"></i></th>
+                                          <th mat-sort-header="email">Email</th>
+                                          <th mat-sort-header="description">Description</th>
+                                          <th class="text-end">Actions</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let list of lstContact| paginate
+                  : {
+                      itemsPerPage: pageSize,
+                      currentPage: currentPage,
+                      totalItems: totalData
+                    };
+              let i = index
+            ">
+                                          <td>{{i+1}} </td>
+                                          <td> <a href="javascript:void(0);" data-bs-toggle="modal" (click)="edit(list)" data-bs-target="#system-user">{{ list.firstname + " " + list.lastname }}</a> </td>
+                                          <td>{{ list.organization }}</td>
+                                          <td>{{ list.title }}</td>
+                                          <td> <a href="https://wa.me/+91{{list.phone}}" target="Phone">{{list.phone}}</a> </td>
+                                          <td>{{ list.email }}</td>
+                                          <td> <span class="d-inline-block text-truncate" style="max-width: 150px;" data-placement="bottom" matTooltip="{{ list.description }}">{{ list.description }}</span> </td>
+                                          <td class="text-center">
+                                              <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons" style="margin-left: 50%;">more_vert</i></a>
+                                                  <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" data-bs-toggle="modal" (click)="updateContact(list)" data-bs-target="#add_contact">Edit This Contact</a> 
+                                                    <a class="dropdown-item" href="javascript:void(0);">Change Contact Image</a> 
+                                                    <a class="dropdown-item" data-bs-toggle="modal" (click)="deleteContacts(list)" data-bs-target="#delete_contact">Delete This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Clone This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Change Record Owner</a> <a class="dropdown-item" href="javascript:void(0);">Generate Merge Document</a> <a class="dropdown-item" href="javascript:void(0);">Change Contact To Lead</a> <a class="dropdown-item" href="javascript:void(0);">Print This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Email This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Task For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Event For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add Activity Set To Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Deal For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Project For Contact</a> </div>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="table_footer">
+                              <div class="col-sm-12 col-md-5">
+                                  <div class="dataTables_info"> Showing {{ serialNumberArray[0] }} to {{ serialNumberArray[serialNumberArray.length - 1] }} of {{ lstContact.length }} entries </div>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                  <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"> </pagination-controls>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> <!-- /Content End -->
+      </div> <!-- /Page Content -->
+  </div>
+
+  <!--Contact modal start here-->
+  <div class="modal right fade" id="add_contact" tabindex="-1" role="dialog" aria-modal="true" data-bs-backdrop="static">
+      <div class="modal-dialog" role="document"> <button type="button" class="close md-close" data-bs-dismiss="modal" aria-label="Close" #closebutton> <span aria-hidden="true">&times;</span> </button>
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title text-center">Add Contact</h4> <button type="button" class="btn-close xs-close close-modal" data-bs-dismiss="modal" #closebutton (click)="resetform()" aria-label="Close"> <span aria-hidden="true"></span></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <form [formGroup]="contactForm" (ngSubmit)="updateContact('')">
+                              <h4>Name & Occupation</h4>
+                              <div class="form-group row">
+                                  <div class="col-md-12"> <label class="col-form-label">Name <span class="text-danger">*</span></label> </div>
+                                  <div class="col-md-4"> <select class="form-select" formControlName="prefix" [class.invalid]="
+                  contactForm.get('prefix ')?.invalid &&
+                  contactForm.get('prefix')?.touched
+                ">
+                                          <option>Mr</option>
+                                          <option>Mrs</option>
+                                      </select>
+                                      <div *ngIf="
+                  contactForm.get('prefix')?.invalid &&
+                  contactForm.get('prefix')?.touched
+                "> <small *ngIf="
+                    contactForm.get('prefix')?.invalid &&
+                    contactForm.get('prefix')?.touched
+                  " class="text-danger"> *Prefix is required</small> </div>
+                                  </div>
+                                  <div class="col-md-4"> <input class="form-control" type="text" placeholder="First name" name="prefix-name" [class.invalid]="
+                      contactForm.get('firstname ')?.invalid &&
+                      contactForm.get('firstname')?.touched
+                    " formControlName="firstname" />
+                                      <div *ngIf="
+                      contactForm.get('firstname')?.invalid &&
+                      contactForm.get('firstname')?.touched
+                    "> <small *ngIf="
+                        contactForm.get('firstname')?.invalid &&
+                        contactForm.get('firstname')?.touched
+                      " class="text-danger"> *First name is required</small> </div>
+                                  </div>
+                                  <div class="col-md-4"> <input class="form-control" type="text" placeholder="Last name" name="last-name" [class.invalid]="
+                      contactForm.get('lastname ')?.invalid &&
+                      contactForm.get('lastname')?.touched
+                    " formControlName="lastname" />
+                                      <div *ngIf="
+                      contactForm.get('lastname')?.invalid &&
+                      contactForm.get('lastname')?.touched
+                    "> <small *ngIf="
+                        contactForm.get('lastname')?.invalid &&
+                        contactForm.get('lastname')?.touched
+                      " class="text-danger"> *Lastname is required</small> </div>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Organization<span class="text-danger">*</span></label> <select class="form-select" formControlName="organization" [class.invalid]="
+                  contactForm.get('organization ')?.invalid &&
+                  contactForm.get('organization')?.touched
+                ">
+                                          <option>Select</option>
+                                          <option *ngFor="let option of company" [value]="option"> {{ option }} </option>
+                                      </select>
+                                      <div *ngIf="
+                  contactForm.get('organization')?.invalid &&
+                  contactForm.get('organization')?.touched
+                "> <small *ngIf="
+                    contactForm.get('organization')?.invalid &&
+                    contactForm.get('organization')?.touched
+                  " class="text-danger"> *Organization is required</small> </div>
+                                  </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Title/Designation</label> <input type="text" class="form-control" name="title" placeholder="Title" formControlName="title" [class.invalid]="
+                  contactForm.get('title ')?.invalid &&
+                  contactForm.get('title')?.touched
+                " />
+                                      <div *ngIf="
+                contactForm.get('title')?.invalid &&
+                contactForm.get('title')?.touched
+              "> <small *ngIf="
+                  contactForm.get('title')?.invalid &&
+                  contactForm.get('title')?.touched
+                " class="text-danger"> *Title is required</small> </div>
+                                  </div>
+                              </div>
+                              <h4>Contact Details</h4>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Email</label> <input type="text" class="form-control" name="email" placeholder="Email" formControlName="email" /> </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Email Opted out</label>
+                                      <div> <label class="container-checkbox"> <input type="checkbox" /> <span class="checkmark"></span> </label> </div>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">WhatsApp</label> <input type="text" class="form-control" name="phone" placeholder="Phone" formControlName="phone" /> </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Mobile Phone</label> <input type="text" class="form-control" name="m-phone" placeholder="Phone" formControlName="mobilePhone" /> </div>
+                              </div>            
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Assistant Phone</label> <input type="text" class="form-control" name="assistant-phone" placeholder="Phone" formControlName="assistantPhone" /> </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Assistant Name</label> <input type="text" class="form-control" name="assistant-name" placeholder="Assistant Name" formControlName="assistantName" /> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Fax</label> <input type="text" class="form-control" name="fax" placeholder="Fax" formControlName="fax" /> </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Linkedin</label> <input type="text" class="form-control" name="linkedin" placeholder="linkedin" formControlName="linkedin" /> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Facebook</label> <input type="text" class="form-control" name="fb" placeholder="Facebook" formControlName="facebook" /> </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Twitter</label> <input type="text" class="form-control" name="twitter" placeholder="Twitter" formControlName="twitter" /> </div>
+                              </div>
+                              <h4>Address Information</h4>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Mailing Address</label> <textarea class="form-control" rows="3" name="mailing-address" placeholder="Address" formControlName="address"></textarea> </div>
+                                  <div class="col-sm-6 mt-3"> <label class="col-form-label"></label><br /> <input type="text" class="form-control" placeholder="Mailing City" name="mailing-city" formControlName="city" /> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <input type="text" class="form-control" placeholder="Mailing State" name="mailing-state" formControlName="state" /> </div>
+                                  <div class="col-sm-6"> <input type="text" class="form-control" placeholder="Mailing Postal code" name="mailing-postal-code" formControlName="postcode" /> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Mailing Country</label> <select class="form-select" formControlName="country">
+                                          <option>India</option>
+                                          <option>US</option>
+                                          <option>Japan</option>
+                                      </select> </div>
+                                  <div class="col-sm-6 mt-3"> <label class="col-form-label">Other Address</label> <textarea class="form-control" rows="3" name="other-address" placeholder="Address" formControlName="otherAddress"></textarea> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <input type="text" class="form-control" placeholder="Other City" name="other-city" formControlName="otherCity" /> </div>
+                                  <div class="col-sm-6"> <input type="text" class="form-control" placeholder="Other State" name="other-state" formControlName="otherState" /> </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <input type="text" class="form-control" placeholder="Other Postal code" name="other-postal-code" formControlName="otherPostcode" /> </div>
+                                  <div class="col-sm-6"> system-user modal <select class="form-select" formControlName="otherCountry">
+                                          <option>India</option>
+                                          <option>US</option>
+                                          <option>Japan</option>
+                                      </select> </div>
+                              </div>
+                              <h4>Dates To Remember</h4>
+                              <div class="form-group row">
+                                  <div class="col-sm-6"> <label class="col-form-label">Due Date <span class="text-danger"></span></label> <input class="form-control datetimepicker" type="text" placeholder="MM/DD/YY" matInput [matDatepicker]="picker1" formControlName="dueDate" />
+                                      <mat-datepicker #picker1></mat-datepicker>
+                                      <mat-datepicker-toggle matIconSuffix [for]="picker1" class="modal-page-datepicker"></mat-datepicker-toggle>
+                                  </div>
+                                  <div class="col-sm-6"> <label class="col-form-label">Date of Birth </label> <input class="form-control datetimepicker" type="text" placeholder="MM/DD/YY" matInput [matDatepicker]="picker2" formControlName="birthday" />
+                                      <mat-datepicker #picker2></mat-datepicker>
+                                      <mat-datepicker-toggle matIconSuffix [for]="picker2" class="modal-page-datepicker"></mat-datepicker-toggle>
+                                  </div>
+                              </div>
+                              <h4>Description Information</h4>
+                              <div class="form-group row">
+                                  <div class="col-sm-12"> <label class="col-form-label">Description </label> <textarea class="form-control" rows="3" id="description" placeholder="Description" formControlName="description">
+                  </textarea> </div>
+                              </div>
+                              <div class="text-center py-3"> 
+                                <button type="button" class="border-0 btn btn-primary btn-gradient-primary btn-rounded submit-btn" type="submit" [disabled]="!contactForm.valid"> Save</button>&nbsp;&nbsp;
+                                 <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal"> Cancel </button> </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div> <!-- modal-content -->
+      </div> <!-- modal-dialog -->
+  </div> <!-- modal -->
+ 
+  <!--system users Modal -->
+  <div class="modal right fade" id="system-user" tabindex="-1" role="dialog" aria-modal="true" data-bs-backdrop='static'>
+      <div class="modal-dialog" role="document"> <button type="button" class="close md-close" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          <div class="modal-content">
+              <div class="modal-header"> <button type="button" class="btn-close xs-close close-modal" data-bs-dismiss="modal"></button>
+                  <div class="row w-100">
+                      <div class="col-md-7 account d-flex">
+                          <div>
+                              <p class="mb-0"></p> <span class="modal-title">{{ contact.firstname + " " + contact.lastname }}</span> <span class="rating-star ms-2" (click)="addFollower(contact)"><i class="fa fa-star fa-2x toggle-password" aria-hidden="true" [ngClass]="{'active': isActive}"></i></span> ` <span class="lock ms-2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                          </div>
+                      </div>
+                      <div class="col-md-5 text-end">
+                          <ul class="list-unstyled list-style-none">
+                              <li class="dropdown list-inline-item"> <br /> <a class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Actions </a>
+                                  <div class="dropdown-menu"> <a class="dropdown-item" href="javascript:void(0);">Edit This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Change Contact Image</a> <a class="dropdown-item" href="javascript:void(0);">Delete This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Clone This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Change Record Owner</a> <a class="dropdown-item" href="javascript:void(0);">Generate Merge Document</a> <a class="dropdown-item" href="javascript:void(0);">Change Contact To Lead</a> <a class="dropdown-item" href="javascript:void(0);">Print This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Email This Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Task For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Event For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add Activity Set To Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Deal For Contact</a> <a class="dropdown-item" href="javascript:void(0);">Add New Project For Contact</a> </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="card due-dates">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col"> <span>Title</span>
+                              <p>{{ contact.title }}</p>
+                          </div>
+                          <div class="col"> <span>Organization</span>
+                              <p>{{ contact.organization }}</p>
+                          </div>
+                          <div class="col"> <span>Phone</span>
+                              <p>{{ contact.phone }}</p>
+                          </div>
+                          <div class="col"> <span>Email</span>
+                              <p>{{ contact.email }}</p>
+                          </div>
+                          <div class="col"> <span>Linkedin</span>
+                              <p>{{ contact.linkedin }}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-body">
+                  <div class="task-infos">
+                      <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded nav-justified">
+                          <li class="nav-item"> <a class="nav-link active" href="#task-details" data-bs-toggle="tab">Details</a> </li>
+                          <li class="nav-item"> <a class="nav-link" href="#task-related" data-bs-toggle="tab">Related</a> </li>
+                          <li class="nav-item"> <a class="nav-link" href="#task-activity" data-bs-toggle="tab">Activity</a> </li>
+                      </ul>
+                      <div class="tab-content">
+                          <div class="tab-pane show active" id="task-details">
+                              <div class="crms-tasks">
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'name' }">
+                                      <!-- <div
+                    class="accordion-header js-accordion-header"
+                    (click)="showAccordions('name')"
+                  >
+
+                    Name & Occupation
+                  </div>
+                  <div class="accordion-body js-accordion-body">
+                    <div class="accordion-body__contents">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td class="border-0">Record ID</td>
+                            <td class="border-0">124192692</td>
+                          </tr>
+                          <tr>
+                            <td class="border-0">Name</td>
+                            <td class="border-0">
+                              {{ contact.firstname + " " + contact.lastname }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Organization</td>
+                            <td>{{ contact.organization }}</td>
+                          </tr>
+                          <tr>
+                            <td>Title</td>
+                            <td>{{ contact.title }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div> -->
+                                  </div>
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'contact' }">
+                                      <div class="accordion-header js-accordion-header" (click)="showAccordions('contact')"> Contact Details </div>
+                                      <div class="accordion-body js-accordion-body">
+                                          <div class="accordion-body__contents">
+                                              <table class="table">
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="border-0">Email</td>
+                                                          <td class="border-0">{{ contact.email }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Email Opted out</td>
+                                                          <td>
+                                                              <div class="form-check m-0 ps-0"> <label class="form-check-label"> <input class="checkbox" type="checkbox" /> <i class="input-helper"></i><i class="input-helper"></i><i class="input-helper"></i></label> </div>
+                                                          </td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Phone</td>
+                                                          <td>{{ contact.phone }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Home Phone</td>
+                                                          <td>{{ contact.homePhone }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Mobile Phone</td>
+                                                          <td>{{ contact.mobilePhone }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Other Phone</td>
+                                                          <td>{{ contact.otherPhone }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Assistant Phone</td>
+                                                          <td>{{ contact.assistantPhone }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Assistant Name</td>
+                                                          <td>{{ contact.assistantName }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Fax</td>
+                                                          <td>{{ contact.fax }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Linkedin</td>
+                                                          <td>{{ contact.linkedin }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Facebook</td>
+                                                          <td>{{ contact.facebook }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Twitter</td>
+                                                          <td>{{ contact.twitter }}</td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'address' }">
+                                      <div class="accordion-header js-accordion-header" (click)="showAccordions('address')"> Address Information </div>
+                                      <div class="accordion-body js-accordion-body">
+                                          <div class="accordion-body__contents">
+                                              <table class="table">
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="border-0">Address</td>
+                                                          <td class="border-0">{{ contact.address }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Other Address</td>
+                                                          <td>{{ contact.otherAddress }}</td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'date' }">
+                                      <div class="accordion-header js-accordion-header" (click)="showAccordions('date')"> Dates To Remember </div>
+                                      <div class="accordion-body js-accordion-body">
+                                          <div class="accordion-body__contents">
+                                              <table class="table">
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="border-0">DueDate</td>
+                                                          <td class="border-0">{{ contact.dueDate | date:'mediumDate' }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Birthday</td>
+                                                          <td>{{ contact.birthday | date:'mediumDate'}}</td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'addInfo' }">
+                                      <div class="accordion-header js-accordion-header" (click)="showAccordions('addInfo')"> Additional Information </div>
+                                      <div class="accordion-body js-accordion-body">
+                                          <div class="accordion-body__contents">
+                                              <table class="table">
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="border-0">Date of Next Activity</td>
+                                                          <td class="border-0">{{ contact.fax }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Date of Last Activity</td>
+                                                          <td>{{ contact.fax }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Contact Owner</td>
+                                                          <td>{{ contact.fax }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td>Contact Created</td>
+                                                          <td>{{ contact.fax }}</td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'desInfo' }">
+                                      <div class="accordion-header js-accordion-header" (click)="showAccordions('desInfo')"> Description Information </div>
+                                      <div class="accordion-body js-accordion-body">
+                                          <div class="accordion-body__contents">
+                                              <table class="table">
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="border-0">Description</td>
+                                                          <td class="border-0"> {{ contact.description }} </td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- <div
+                  class="tasks__item crms-task-item"
+                  [ngClass]="{ active: showAccordion == 'tagList' }"
+                >
+                  <div
+                    class="accordion-header js-accordion-header"
+                    (click)="showAccordions('tagList')"
+                  >
+
+                    Tag List
+                  </div>
+                  <div class="accordion-body js-accordion-body">
+                    <div class="accordion-body__contents">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td class="border-0">Tag List</td>
+                            <td class="border-0">{{ contact.tagList }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div> -->
+                              </div>
+                          </div>
+                          <div class="tab-pane task-related" id="task-related">
+                              <div class="row pt-2">
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-danger card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Companies</h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-info card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Deals</h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-success card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Projects</h4> <span>1</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row pt-3">
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-success card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Contacts</h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-danger card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Notes</h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-info card-img-holder text-white h-100">
+                                          <div class="card-body">Action <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Files</h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="crms-tasks p-2">
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'companies1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('companies1')"> Companies </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Company Name</th>
+                                                                  <th>Phone</th>
+                                                                  <th>Billing Country</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td> <a href="javascript:void(0);" class="avatar"><img alt="" src="assets/img/c-logo2.png" /></a> <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#company-details">Clampett Oil and Gas Corp.</a> </td>
+                                                                  <td>8754554531</td>
+                                                                  <td>United States</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td> <a href="javascript:void(0);" class="avatar"><img alt="" src="assets/img/c-logo.png" /></a> <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#company-details">Acme Corporation</a> </td>
+                                                                  <td>8754554531</td>
+                                                                  <td>United States</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'deals1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('deals1')"> Deals </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Deal Name</th>
+                                                                  <th>Company</th>
+                                                                  <th>User Responsible</th>
+                                                                  <th>Deal Value</th>
+                                                                  <th></th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Bensolet</td>
+                                                                  <td>Globex</td>
+                                                                  <td>John Doe</td>
+                                                                  <td>USD $‎180</td>
+                                                                  <td> <i class="fa fa-star" aria-hidden="true"></i> </td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>Ansanio tech</td>
+                                                                  <td>Lecto</td>
+                                                                  <td>John Smith</td>
+                                                                  <td>USD $‎180</td>
+                                                                  <td> <i class="fa fa-star" aria-hidden="true"></i> </td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'projects1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('projects1')"> Projects </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Project Name</th>
+                                                                  <th>Status</th>
+                                                                  <th>User Responsible</th>
+                                                                  <th>Date Created</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Wilmer Deluna</td>
+                                                                  <td>Completed</td>
+                                                                  <td>Williams</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'contacts1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('contacts1')"> Contacts </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Name</th>
+                                                                  <th>Title</th>
+                                                                  <th>phone</th>
+                                                                  <th>Email</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td> {{ contact.firstname + " " + contact.lastname
+                                  }} </td>
+                                                                  <td>{{ contact.title }}</td>
+                                                                  <td>{{ contact.phone }}</td>
+                                                                  <td>{{ contact.email }}</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>John Doe</td>
+                                                                  <td>Enquiry</td>
+                                                                  <td>987675656</td>
+                                                                  <td>john@gmail.com</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'notes1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('notes1')"> Notes </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Name</th>
+                                                                  <th>Size</th>
+                                                                  <th>Category</th>
+                                                                  <th>Date Added</th>
+                                                                  <th>Added by</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Document</td>
+                                                                  <td>50KB</td>
+                                                                  <td>Phone call</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td>John Doe</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>Finance</td>
+                                                                  <td>100KB</td>
+                                                                  <td>Enquiry</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td>Smith</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'files1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('files1')"> Files </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Name</th>
+                                                                  <th>Size</th>
+                                                                  <th>Category</th>
+                                                                  <th>Date Added</th>
+                                                                  <th>Added by</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Document</td>
+                                                                  <td>50KB</td>
+                                                                  <td>Phone Call</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td>John Doe</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>Finance</td>
+                                                                  <td>100KB</td>
+                                                                  <td>Enquiry</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td>Smith</td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Edit Link</a> <a class="dropdown-item" href="javascript:void(0);">Delete Link</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane" id="task-activity">
+                              <div class="row pt-2">
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-danger card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3"> Total Activities </h4> <span>2</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="card bg-gradient-info card-img-holder text-white h-100">
+                                          <div class="card-body"> <img src="assets/img/circle.png" class="card-img-absolute" alt="circle-image" />
+                                              <h4 class="font-weight-normal mb-3">Last Activity</h4> <span>1</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="crms-tasks p-2">
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'activity1' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('activity1')"> Upcoming Activity </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Type</th>
+                                                                  <th>Activity Name</th>
+                                                                  <th>Assigned To</th>
+                                                                  <th>Due Date</th>
+                                                                  <th>Status</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Meeting</td>
+                                                                  <td>Call Enquiry</td>
+                                                                  <td>John Doe</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td> <label class="container-checkbox"> <input type="checkbox" checked /> <span class="checkmark"></span> </label> </td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Add New Task</a> <a class="dropdown-item" href="javascript:void(0);">Add New Event</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>Meeting</td>
+                                                                  <td>Phone Enquiry</td>
+                                                                  <td>David</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td> <label class="container-checkbox"> <input type="checkbox" checked /> <span class="checkmark"></span> </label> </td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Add New Task</a> <a class="dropdown-item" href="javascript:void(0);">Add New Event</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="tasks__item crms-task-item" [ngClass]="{ active: showAccordion == 'past' }">
+                                          <div class="accordion-header js-accordion-header" (click)="showAccordions('past')"> Past Activity </div>
+                                          <div class="accordion-body js-accordion-body">
+                                              <div class="accordion-body__contents">
+                                                  <div class="table-responsive">
+                                                      <table class="table table-striped table-nowrap custom-table mb-0 datatable">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>Type</th>
+                                                                  <th>Activity Name</th>
+                                                                  <th>Assigned To</th>
+                                                                  <th>Due Date</th>
+                                                                  <th>Status</th>
+                                                                  <th class="text-end">Actions</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td>Meeting</td>
+                                                                  <td>Call Enquiry</td>
+                                                                  <td>John Doe</td>
+                                                                  <td>13-Jul-20 11:37 PM</td>
+                                                                  <td> <label class="container-checkbox"> <input type="checkbox" checked /> <span class="checkmark"></span> </label> </td>
+                                                                  <td class="text-center">
+                                                                      <div class="dropdown dropdown-action"> <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                                          <div class="dropdown-menu dropdown-menu-end"> <a class="dropdown-item" href="javascript:void(0);">Add New Task</a> <a class="dropdown-item" href="javascript:void(0);">Add New Event</a> </div>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> <!-- modal-content -->
+      </div> <!-- modal-dialog -->
+  </div> <!-- modal -->
+</div>
+
+<!-- Delete Contacts Modal  -->
+<div class="modal custom-modal fade" id="delete_contact" role="dialog" data-bs-backdrop='static'>
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-body">
+              <div class="form-header">
+                  <h3>Delete Contact</h3>
+                  <p>Are you sure want to delete?</p>
+              </div>
+              <div class="modal-btn delete-action">
+                  <div class="row">
+                      <div class="col-6"> <a (click)="deleteContacts('')" class="btn btn-primary continue-btn">Delete</a> </div>
+                      <div class="col-6"> <a href="javascript:void(0);" data-bs-dismiss="modal" #deleteclosebutton class="btn btn-primary cancel-btn">Cancel</a> </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> 

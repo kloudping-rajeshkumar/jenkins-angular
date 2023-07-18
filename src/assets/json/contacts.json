@@ -1,0 +1,75 @@
+{
+    "data" : [
+    {
+      "id": 1,
+      "fullname": "Wilmer Deluna",
+      "title": "Facility Manager",
+      "phone": "875455453",
+      "email": "wilmer@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor": "color1",
+      "img": "assets/img/profiles/avatar-11.jpg"
+    },
+     {
+      "id": 2,
+      "fullname": "John Doe",
+      "title": "Manager",
+      "phone": "875455453",
+      "email": "john@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color2",
+      "img": "assets/img/profiles/avatar-10.jpg"
+    },
+     {
+      "id": 3,
+      "fullname": "John Smith",
+      "title": "CMO",
+      "phone": "875455453",
+      "email": "smith@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color3",
+      "img": "assets/img/profiles/avatar-25.jpg"
+    },
+     {
+      "id": 4,
+      "fullname": "Wilmer Deluna",
+      "title": "Property Manager",
+      "phone": "875455453",
+      "email": "john@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color4",
+      "img": "assets/img/profiles/avatar-26.jpg"
+    },
+     {
+      "id": 5,
+      "fullname": "Wilmer Deluna",
+      "title": "Facility Manager",
+      "phone": "875455453",
+      "email": "wilmer@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color1",
+      "img": "assets/img/profiles/avatar-11.jpg"
+    },
+    {
+      "id": 6,
+     "fullname": "John Doe",
+      "title": "Manager",
+      "phone": "875455453",
+      "email": "john@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color2",
+      "img": "assets/img/profiles/avatar-10.jpg"
+    },
+    {
+      "id": 7,
+      "fullname": "Vinson JK",
+      "title": "Facility Manager",
+      "phone": "875455453",
+      "email": "wilmer@gmail.com",
+      "taglist": "Sample_data",
+      "changeColor":"color4",
+      "img": "assets/img/profiles/avatar-11.jpg"
+    }
+  ],
+  "totalData":7
+}

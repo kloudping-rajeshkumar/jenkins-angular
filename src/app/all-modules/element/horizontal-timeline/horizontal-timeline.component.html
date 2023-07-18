@@ -1,0 +1,68 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="crms-title row bg-white mb-4">
+      <div class="col">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="la la-table"></i>
+          </span>
+          <span>Horizontal Timeline</span>
+        </h3>
+      </div>
+      <div class="col text-end">
+        <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+          <li class="breadcrumb-item">
+            <a [routerLink]="routes.dealsDashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Horizontal Timeline</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Timeline -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <mat-stepper #stepper>
+              <ng-container *ngFor="let item of dates; let i = index">
+                <mat-step>
+                  <ng-template matStepLabel>{{ item }}</ng-template>
+                  <p class="m-t-40">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Illum praesentium officia, fugit recusandae ipsa, quia velit
+                    nulla adipisci? Consequuntur aspernatur at, eaque hic
+                    repellendus sit dicta consequatur quae, ut harum ipsam
+                    molestias maxime non nisi reiciendis eligendi! Doloremque
+                    quia pariatur harum ea amet quibusdam quisquam, quae,
+                    temporibus dolores porro doloribus.
+                  </p>
+                  <div>
+                    <button *ngIf="i > 0" mat-button matStepperPrevious>
+                      Back
+                    </button>
+                    <button
+                      [hidden]="i == dates.length - 1"
+                      mat-button
+                      matStepperNext
+                    >
+                      Next
+                    </button>
+                    <button
+                      *ngIf="i == dates.length - 1"
+                      mat-button
+                      (click)="stepper.reset()"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </mat-step>
+              </ng-container>
+            </mat-stepper>
+          </div>
+        </div>
+      </div>
+      <!-- /Ribbon -->
+    </div>
+  </div>
+</div>

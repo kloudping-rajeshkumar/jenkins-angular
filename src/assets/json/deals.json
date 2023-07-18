@@ -1,0 +1,251 @@
+{
+  "data" :  [
+      {
+        "id": 1,
+        "symbol": "B",
+        "dealname": "Bensolet",
+        "company": "Globex",
+        "forecaseclosedate": "06-Aug-20",
+        "userresponsible": "John Doe",
+        "dealvalue": "USD $180",
+        "changeColor": "color1",
+        "pipeline": [
+      {
+        "tooltip_data":"stage: Prospecting",
+        "active":0
+      },
+      {
+        "tooltip_data":"stage: Qualification",
+        "active":1
+      },
+      {
+        "tooltip_data":"stage: Needs Analysis",
+        "active":0
+      },
+      {
+        "tooltip_data":"stage: Proposal",
+        "active":1
+      },
+      {
+        "tooltip_data":"stage: Negotiation",
+        "active":0
+      },
+      {
+        "tooltip_data":"stage: Closed Won",
+        "active":0
+      }
+      ]
+      },
+       {
+        "id": 2,
+        "symbol": "W",
+        "dealname": "Whirligig G990",
+        "company": "Massive",
+        "forecaseclosedate": "01-May-18",
+        "userresponsible": "John Doe",
+        "dealvalue": "USD $180",
+        "changeColor": "color2",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":1
+        }]
+      },
+       {
+        "id": 3,
+        "symbol": "A",
+        "dealname": "Ansanio tech",
+        "company": "Vehement",
+        "forecaseclosedate": "02-Jan-19",
+        "userresponsible": "John Doe",
+        "dealvalue": "USD $180",
+        "changeColor": "color3",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":1
+        }]
+      },
+       {
+        "id": 4,
+        "symbol": "S",
+        "dealname": "Sensored Lector",
+        "company": "Hooli",
+        "forecaseclosedate": "12-Jul-20",
+        "userresponsible": "Williams",
+        "dealvalue": "USD $180",
+        "changeColor": "color4",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":0
+        }]
+      },
+       {
+        "id": 5,
+        "symbol": "H",
+        "dealname": "Hentry Dio",
+        "company": "Umbrella",
+        "forecaseclosedate": "03-Jul-20",
+        "userresponsible": "David Cravo",
+        "dealvalue": "USD $180",
+        "changeColor": "color5",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":0
+        }]
+      },
+      {
+        "id": 6,
+       "symbol": "F",
+        "dealname": "Feneldo",
+        "company": "Initech",
+        "forecaseclosedate": "03-Jul-20",
+        "userresponsible": "Siphen David",
+        "dealvalue": "USD $180",
+        "changeColor": "color6",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":0
+        }]
+      },
+      {
+        "id": 7,
+        "symbol": "I",
+        "dealname": "Iresope Meldo",
+        "company": "Soylent Corp",
+        "forecaseclosedate": "03-Jul-20",
+        "userresponsible": "John Smith",
+        "dealvalue": "USD $180",
+        "changeColor": "color7",
+        "pipeline": [
+        {
+          "tooltip_data":"stage: Prospecting",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Qualification",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Needs Analysis",
+          "active":1
+        },
+        {
+          "tooltip_data":"stage: Proposal",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Negotiation",
+          "active":0
+        },
+        {
+          "tooltip_data":"stage: Closed Won",
+          "active":0
+        }]
+      }
+    ],
+    "totalData":7
+}

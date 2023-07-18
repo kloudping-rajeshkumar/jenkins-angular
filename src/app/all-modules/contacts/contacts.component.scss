@@ -1,0 +1,18 @@
+.crms-task-item.active .accordion-body {
+	display: block;
+}
+.modal-page-datepicker {
+	position: relative;
+	bottom: 43px;
+	left: 329px;
+}
+
+::ng-deep .mat-tooltip {
+	font-size: 16px;
+  }
+
+.fa-whatsapp:before {
+    content: "\f232";
+    color: rgb(0, 128, 55);
+    font-size: 18px;
+}

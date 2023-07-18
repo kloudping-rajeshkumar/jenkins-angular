@@ -1,0 +1,326 @@
+
+
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="crms-title row bg-white">
+            <div class="col">
+              <h3 class="page-title m-0">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="feather icon-smartphone"></i>
+                </span>
+                Signature
+              </h3>
+            </div>
+            <div class="col text-end">
+              <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+                <li class="breadcrumb-item">
+                  <a [routerLink]="routes.dealsDashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Emails / Signature</li>
+              </ul>
+            </div>
+          </div>
+
+
+        <!-- Page Header -->
+        <div class="page-header pt-3 mb-0">
+            <div class="row">
+              
+              <div class="col text-end">
+                <ul class="list-inline-item ps-0">
+    
+                  <li class="list-inline-item">
+                    <button class="btn btn-primary btn-sm me-1"
+                      id="add-task" data-bs-toggle="modal" data-bs-target="#add_signature" #addclosebutton
+                      (click)="resetform()" aria-label="Close">
+                      New Signature
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <!-- /Page Header -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card categories-table  mb-0">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table_header">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length">
+                                            <label>
+                                                Show
+                                                <select [(ngModel)]="pageSize" (ngModelChange)="PageSize()"
+                                                    class="form-control form-control-sm">
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select>
+                                                entries
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_filter">
+                                            <label>
+                                           
+                                                <input  type="search" [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" placeholder="search..."
+                                                   
+                                                    class="form-control form-control-sm" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <table matSort (matSortChange)="sortData($event)"
+                                class="table custom-table mb-0 datatables table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th mat-sort-header="name">SignatureName</th>
+                                        <th mat-sort-header="fromEmail">FromEmail</th>
+                                        <th mat-sort-header="body">Body</th>
+                                       
+                                        
+                                        <th class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let list of lstSignature| paginate
+                                : {
+                                    itemsPerPage: pageSize,
+                                    currentPage: currentPage,
+                                    totalItems: totalData
+                                  };
+                            let i = index
+                          ">
+                                    <tr>
+                                      <!-- <td> 
+                                        <div class="rating-star ms-2" *ngIf="list.type==4? 'true': 'fasle'" (click)="addFollower(list); recent(list);"><i
+                                      class="fa fa-star fa-2x toggle-password" aria-hidden="true"
+                                      [ngClass]="{'active': isActive}"></i></div>
+                                    
+                                   </td> -->
+                                        <td>{{i+1}}</td>
+                                        <td>{{list.signatureName}}</td>
+                                        <td>{{list.fromEmail}} </td>
+                                        <td><a class="invoices-preview-link"  data-bs-toggle="modal"
+                                          data-bs-target="#preview" (click)="template=list; recent(list);" ><i class="fas fa-eye"></i> Preview</a></td>
+                                      <td>
+                                        <td class="text-end">
+                                          <a href="javascript:void(0);"
+                                              class="table-action-btn btn btn-sm bg-success-light me-1"
+                                              data-bs-toggle="modal" data-bs-target="#add_signature" (click)="updateSignature(list); recent(list);">
+                                              <i class="feather icon-edit me-1"></i> {{list.action1}}
+                                          </a>
+                                          <a href="javascript:void(0);"
+                                              class="table-action-btn btn btn-sm bg-danger-light"
+                                              data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deletesignature (list)" >
+                                              <i class="feather icon-trash-2 me-1"></i> {{list.action2}}
+                                          </a>
+                                      </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table_footer">
+                            <div class="col-sm-12 col-md-5">
+                              <div class="dataTables_info">
+                                Showing {{ serialNumberArray[0] }} to
+                                {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                {{ lstSignature.length }} entries
+                              </div>
+                            </div>
+            
+                            <div class="d-flex justify-content-center">
+                              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"> </pagination-controls>
+                          </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--  Add Template Modal -->
+    <div class="modal fade  " id="add_signature" tabindex="-1" role="dialog" aria-modal="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+
+      <button type="button" class="close md-close" data-bs-dismiss="modal" aria-label="Close" #closebutton>
+
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h4 class="modal-title text-center">{{modelTitle? 'Edit Signature' : 'Add Signature'}}</h4>
+          <button type="button" class="btn-close xs-close close-modal" data-bs-dismiss="modal" #closebutton  aria-label="Close">  </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="signatureForm"  (ngSubmit)="updateSignature('')">
+                <div class="card-body">
+                    <div class="bank-inner-details">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>SignatureName<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="name"  [class.invalid]="
+                                    signatureForm.get('name ')?.invalid &&
+                                    signatureForm.get('name')?.touched
+                                      " >
+                                      <div *ngIf="
+                                      signatureForm.get('name')?.invalid &&
+                                      signatureForm.get('name')?.touched
+                                        ">
+                                        <small *ngIf="
+                                        signatureForm.get('name')?.invalid &&
+                                        signatureForm.get('name')?.touched
+                                          " class="text-danger">
+                                          *Signature is required</small>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-md-12">
+                                <label class="col-form-label">From Email<span class="text-danger">*</span></label>
+                        
+                        
+                                <select class="form-select"[class.invalid]="
+                                signatureForm.get('fromEmail')?.invalid &&
+                                signatureForm.get('fromEmail')?.touched"  formControlName="fromEmail" 
+                        
+                              >   <option >
+                                    gopal.krishna@kloudping.com
+                                  </option>
+                                  <option >
+                                    sathish@kloudping.com
+                                  </option>
+                                  <option >
+                                    rajesh.kanna@kloudping.com
+                                  </option>
+                                </select>
+                                <div *ngIf="
+                                signatureForm.get('fromEmail')?.invalid &&
+                                signatureForm.get('fromEmail')?.touched
+                              ">
+                                  <small *ngIf="
+                                  signatureForm.get('fromEmail')?.invalid &&
+                                  signatureForm.get('fromEmail')?.touched
+                                " class="text-danger">
+                                    *From Email is required</small>
+                                </div>
+                              </div>
+                           </div>
+                            
+                           
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Body</label>
+                                    <angular-editor [placeholder]="'Enter text here...'" formControlName="body" [class.invalid]="
+                                    signatureForm.get('body ')?.invalid &&
+                                    signatureForm.get('body')?.touched
+                                      " [config]="config"></angular-editor>
+                                    
+                                </div>
+                                <div *ngIf="
+                                signatureForm.get('body')?.invalid &&
+                                signatureForm.get('body')?.touched
+                                  ">
+                                  <small *ngIf="
+                                  signatureForm.get('body')?.invalid &&
+                                  signatureForm.get('body')?.touched
+                                    " class="text-danger">
+                                    *Body is required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center py-3">
+                  <button type="button" class="border-0 btn btn-primary btn-gradient-primary btn-rounded submit-btn"
+                    type="submit" [disabled]="!signatureForm.valid">
+                    Save</button>&nbsp;&nbsp;
+    
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal" >
+                    Cancel
+                  </button>
+                </div>
+                </form>
+            </div> 
+          </div>
+        </div>
+      </div>
+      <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+  </div>
+    <!-- Modal End -->
+   
+    <!--  Preview Modal -->
+    <div class="modal custom-modal fade bank-details" id="preview" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <div class="form-header text-start mb-0">
+                      <h4 class="mb-0 text-dark fw-bold">{{template.name}}</h4>
+                  </div>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" #closebutton>
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="card">
+                  
+                  <div class="card-body">
+                      <div class="bank-inner-details">
+                          <div class="row">
+                              <div class="col-lg-12 col-md-12">
+                                  <div class="form-group" [innerHTML]="template.body">
+                                      
+                                  </div>
+                              </div>
+                              
+                              
+                              
+                              
+                          </div>
+                      </div>
+                  </div>
+                 
+                  
+              </div> 
+          </div>
+      </div>
+  </div>
+  <!-- Modal -->
+ 
+  <!-- Delete Modal -->
+   <div class="modal custom-modal fade" id="deleteModal" role="dialog" data-bs-backdrop='static'>
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+             <div class="modal-body">
+            <div class="form-header">
+                <h3>Delete Template</h3>
+                <p>Are you sure want to delete?</p>
+              </div>
+                     <div class="modal-btn delete-action">
+                       <div class="row">
+                          <div class="col-6">
+                        <a (click)="deletesignature('')" class="btn btn-primary continue-btn">Delete</a>
+                         </div>
+                        <div class="col-6">
+                        <a href="javascript:void(0);"  data-bs-dismiss="modal" #deleteclosebutton  class="btn btn-primary cancel-btn">Cancel</a>
+                    </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+   </div>
+</div>

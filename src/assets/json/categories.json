@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "categoryName": "Productivity",
+      "date": "10/04/22",
+      "addedBy": "Admin",
+      "status": "checkbox",
+      "action1": "Edit",
+      "action2": "Delete",
+      "isStatus": false
+    },
+    {
+      "id": 2,
+      "categoryName": "Sales",
+      "date": "10/04/22",
+      "addedBy": "Admin",
+      "status": "checkbox",
+      "action1": "Edit",
+      "action2": "Delete",
+      "isStatus": false
+    },
+    {
+      "id": 3,
+      "categoryName": "Marketing",
+      "date": "10/04/22",
+      "addedBy": "Admin",
+      "status": "checkbox",
+      "action1": "Edit",
+      "action2": "Delete",
+      "isStatus": false
+    },
+    {
+      "id": 4,
+      "categoryName": "Management",
+      "date": "10/04/22",
+      "addedBy": "Wegman",
+      "status": "checkbox",
+      "action1": "Edit",
+      "action2": "Delete",
+      "isStatus": false
+    }
+  ],
+  "totalData": 4
+}

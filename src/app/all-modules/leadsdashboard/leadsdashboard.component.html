@@ -1,0 +1,191 @@
+<div>
+  <div class="page-wrapper">
+    <div class="content container-fluid">
+      <!-- Page Header -->
+      <div class="crms-title row bg-white mb-4">
+        <div class="col p-0">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+              <i class="la la-table"></i>
+            </span>
+            Leads Dashboard
+          </h3>
+        </div>
+        <div class="col p-0 text-end">
+          <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+            <li class="breadcrumb-item">
+              <a [routerLink]="routes.dealsDashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Leads Dashboard</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /Page Header -->
+
+      <div class="row graphs">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Sales Statistics</h3>
+              <apx-chart
+                [series]="chartOptionsSeven.series"
+                [chart]="chartOptionsSeven.chart"
+                [dataLabels]="chartOptionsSeven.dataLabels"
+                [plotOptions]="chartOptionsSeven.plotOptions"
+                [yaxis]="chartOptionsSeven.yaxis"
+                [legend]="chartOptionsSeven.legend"
+                [fill]="chartOptionsSeven.fill"
+                [stroke]="chartOptionsSeven.stroke"
+                [tooltip]="chartOptionsSeven.tooltip"
+                [xaxis]="chartOptionsSeven.xaxis"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Completed Tasks</h3>
+              <div id="chart">
+                <apx-chart
+                  [series]="chartOptionsEight.series"
+                  [chart]="chartOptionsEight.chart"
+                  [xaxis]="chartOptionsEight.xaxis"
+                  [markers]="chartOptionsEight.markers"
+                  [stroke]="chartOptionsEight.stroke"
+                  [yaxis]="chartOptionsEight.yaxis"
+                  [dataLabels]="chartOptionsEight.dataLabels"
+                  [title]="chartOptionsEight.title"
+                  [fill]="chartOptionsEight.fill"
+                  [tooltip]="chartOptionsEight.tooltip"
+                  [legend]="chartOptionsEight.legend"
+                  [labels]="chartOptionsEight.labels"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row graphs">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Total Lead</h3>
+              <div id="chart-Total-Lead">
+                <apx-chart
+                  [series]="chartOptionsOne.series"
+                  [chart]="chartOptionsOne.chart"
+                  [labels]="chartOptionsOne.labels"
+                  [responsive]="chartOptionsOne.responsive"
+                  [colors]="chartOptionsOne.colors"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Number of Employees</h3>
+              <apx-chart
+                [series]="chartOptionsTwo.series"
+                [chart]="chartOptionsTwo.chart"
+                [dataLabels]="chartOptionsTwo.dataLabels"
+                [stroke]="chartOptionsTwo.stroke"
+                [colors]="chartOptionsTwo.colors"
+                [title]="chartOptionsTwo.title"
+                [subtitle]="chartOptionsTwo.subtitle"
+                [plotOptions]="chartOptionsTwo.plotOptions"
+                [yaxis]="chartOptionsTwo.yaxis"
+                [xaxis]="chartOptionsTwo.xaxis"
+                [tooltip]="chartOptionsTwo.tooltip"
+                [labels]="chartOptionsTwo.labels"
+                [legend]="chartOptionsTwo.legend"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row graphs">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Sales Overview</h3>
+              <div id="line-charts">
+                <apx-chart class="multiline-chart-apex"
+                  [series]="chartOptionsThree.series"
+                  [chart]="chartOptionsThree.chart"
+                  [xaxis]="chartOptionsThree.xaxis"
+                  [dataLabels]="chartOptionsThree.dataLabels"
+                  [grid]="chartOptionsThree.grid"
+                  [stroke]="chartOptionsThree.stroke"
+                  [title]="chartOptionsThree.title"
+                  [legend]="chartOptionsThree.legend"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Total Revenue</h3>
+              <div id="bar-charts">
+                <apx-chart class="bar-chart-apex"
+                  [series]="chartOptionsSix.series"
+                  [chart]="chartOptionsSix.chart"
+                  [dataLabels]="chartOptionsSix.dataLabels"
+                  [plotOptions]="chartOptionsSix.plotOptions"
+                  [yaxis]="chartOptionsSix.yaxis"
+                  [legend]="chartOptionsSix.legend"
+                  [fill]="chartOptionsSix.fill"
+                  [stroke]="chartOptionsSix.stroke"
+                  [tooltip]="chartOptionsSix.tooltip"
+                  [xaxis]="chartOptionsSix.xaxis"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row graphs">
+        <div class="col-md-6 mb-0">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">Yearly Projects</h3>
+              <apx-chart
+                [series]="chartOptionsFive.series"
+                [chart]="chartOptionsFive.chart"
+                [dataLabels]="chartOptionsFive.dataLabels"
+                [plotOptions]="chartOptionsFive.plotOptions"
+                [yaxis]="chartOptionsFive.yaxis"
+                [xaxis]="chartOptionsFive.xaxis"
+                [legend]="chartOptionsFive.legend"
+                [colors]="chartOptionsFive.colors"
+                [grid]="chartOptionsFive.grid"
+                [subtitle]="chartOptionsFive.subtitle"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-0">
+          <div class="card h-100 mb-0">
+            <div class="card-body">
+              <h3 class="card-title">Total Sales</h3>
+              <apx-chart class="singleline-chart-apex"
+                [series]="chartOptionsFour.series"
+                [chart]="chartOptionsFour.chart"
+                [xaxis]="chartOptionsFour.xaxis"
+                [dataLabels]="chartOptionsFour.dataLabels"
+                [grid]="chartOptionsFour.grid"
+                [stroke]="chartOptionsFour.stroke"
+                [title]="chartOptionsFour.title"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

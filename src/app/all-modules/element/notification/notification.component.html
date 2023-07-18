@@ -1,0 +1,199 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="crms-title row bg-white mb-4">
+      <div class="col">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="la la-table"></i>
+          </span>
+          <span>Notification</span>
+        </h3>
+      </div>
+      <div class="col text-end">
+        <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+          <li class="breadcrumb-item">
+            <a [routerLink]="routes.dealsDashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Notification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Alert</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              data-bs-toggle="modal"
+              data-bs-target="#alert_modal"
+              class="btn btn-primary waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Confirm</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              data-bs-toggle="modal"
+              data-bs-target="#confirm_modal"
+              class="btn btn-primary waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Info Alert</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              (click)="typeInfo()"
+              class="btn btn-primary waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Success Alert</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              (click)="typeSuccess()"
+              class="btn btn-primary btn-sm waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Error Alert</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              (click)="typeError()"
+              class="btn btn-primary btn-sm waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+
+      <!-- Alert -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Warning Alert</div>
+          </div>
+          <div class="card-body">
+            <a
+              href="javascript: void(0);"
+              (click)="typeWarning()"
+              class="btn btn-primary btn-sm waves-effect waves-light"
+              >Click me</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /Alert -->
+    </div>
+    <div class="modal custom-modal fade" id="alert_modal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-icon text-center mb-3">
+              <i class="fa fa-exclamation-circle text-warning custom-circle"></i>
+            </div>
+            <div class="modal-text text-center">
+              <p>Are you sure want you wont be able to revert this ?</p>
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button
+              (click)="cancel()"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              (click)="confirm()"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal custom-modal fade" id="confirm_modal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-icon text-center mb-3">
+              <i class="fas fa-trash-alt text-danger custom-trash"></i>
+            </div>
+            <div class="modal-text text-center">
+              <p>Are you sure want you wont be able to revert this ?</p>
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button
+              type="button"
+              (click)="confirm()"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
+
+            <button
+              (click)="cancel()"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+{
+    "data": [
+        {
+          "id": 1,
+          "taskname": "Add your customers",
+          "responsibleuser": "John Doe",
+          "duedate": "02,Jan 2020",
+          "taskowner": "John Doe",
+          "status": "Not Started",
+          "progress": "color1",
+          "percentage": "25%"
+        },
+        {
+          "id": 2,
+          "taskname": "Invite your team",
+          "responsibleuser": "James amen",
+          "duedate": "02,Jan 2020",
+          "taskowner": "James amen",
+          "status": "Not Started",
+          "progress": "color2",
+          "percentage": "50%"
+        },
+        {
+          "id": 3,
+         "taskname": "Save your emails",
+          "responsibleuser": "Willliams",
+          "duedate": "02,Jan 2020",
+          "taskowner": "Willliams",
+          "status": "Not Started",
+          "progress": "color3",
+          "percentage": "75%"
+        },
+        {
+          "id": 4,
+          "taskname": "Connect to your files",
+          "responsibleuser": "John smith",
+          "duedate": "02,Jan 2020",
+          "taskowner": "John Smith",
+          "status": "Not Started",
+          "progress": "color3",
+          "percentage": "75%"
+        },
+        {
+          "id": 5,
+          "taskname": "Customers Meeting",
+          "responsibleuser": "John Smith",
+          "duedate": "02,Jan 2020",
+          "taskowner": "John Smith",
+          "status": "Not Started",
+          "progress": "color3",
+          "percentage": "75%"
+        },
+        {
+          "id": 6,
+          "taskname": "Personalize your account",
+          "responsibleuser": "Dav id cravo",
+          "duedate": "02,Jan 2020",
+          "taskowner": "Dav id cravo",
+          "status": "Not Started",
+          "progress": "color4",
+          "percentage": "75%"
+        },
+        {
+          "id": 7,
+          "taskname": "Personalize your account",
+          "responsibleuser": "Dav id cravo",
+          "duedate": "02,Jan 2020",
+          "taskowner": "Dav id cravo",
+          "status": "Not Started",
+          "progress": "color4",
+          "percentage": "75%"
+        }
+    ],
+    "totalData":7
+}

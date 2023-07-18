@@ -1,0 +1,82 @@
+{
+    "data" :  [
+        {
+          "id": 1,
+          "symbol": "A",
+          "projectname": "Astronaut",
+          "projectstatus": "In Progress",
+          "userresponsible": "John Doe",
+          "projectcategory": "Phone Call",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color1",
+          "pipeline": [0,0,1,1]
+        },
+         {
+          "id": 2,
+           "symbol": "B",
+          "projectname": "Barcelona",
+          "projectstatus": "Completed",
+          "userresponsible": "David Milton",
+          "projectcategory": "-",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color2",
+          "pipeline": [1,0,1,1]
+        },
+         {
+          "id": 3,
+           "symbol": "C",
+          "projectname": "Casanova",
+          "projectstatus": "Not Started",
+          "userresponsible": "John Doe",
+          "projectcategory": "Meeting",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color3",
+          "pipeline": [1,1,1,0]
+        },
+         {
+          "id": 4,
+           "symbol": "C",
+          "projectname": "Charming",
+          "projectstatus": "Completed",
+          "userresponsible": "Micheal",
+          "projectcategory": "-",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color3",
+          "pipeline": [1,0,1,1]
+        },
+         {
+          "id": 5,
+           "symbol": "F",
+          "projectname": "Fireball",
+          "projectstatus": "In Progress",
+          "userresponsible": "John Smith",
+          "projectcategory": "Follow up",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color4",
+          "pipeline": [1,0,0,1]
+        },
+        {
+          "id": 6,
+           "symbol": "G",
+          "projectname": "Gray Panthers",
+          "projectstatus": "In Progress",
+          "userresponsible": "Samsun David",
+          "projectcategory": "Email",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color5",
+          "pipeline": [0,0,1,1]
+        },
+        {
+          "id": 7,
+           "symbol": "G",
+          "projectname": "Gray Panthers",
+          "projectstatus": "In Progress",
+          "userresponsible": "Samsun David",
+          "projectcategory": "Email",
+          "projectcreated": "03-Jun-20 1:14 AM",
+          "changeColor": "color5",
+          "pipeline": [0,0,1,1]
+        }
+      ],
+      "totalData":7
+}

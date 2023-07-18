@@ -1,0 +1,429 @@
+<div>
+  <div class="page-wrapper">
+    <!-- Page Content -->
+    <div class="content container-fluid">
+      <div class="crms-title row bg-white">
+        <div class="col">
+          <h3 class="page-title m-0">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+              <i class="feather icon-smartphone"></i>
+            </span>
+            Scheduled Email Trigger
+          </h3>
+        </div>
+        <div class="col text-end">
+          <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+            <li class="breadcrumb-item">
+              <a [routerLink]="routes.scheduledEmail">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Emails / Scheduled Email Trigger</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page Header -->
+      <div class="page-header pt-3 mb-0">
+        <div class="row">
+          <div class="col">
+            <div class="dropdown">
+              <a class="dropdown-toggle recently-viewed" href="javascript:void(0);" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{filterValue}}</a>
+              <div class="dropdown-menu">
+
+                <a class="dropdown-item" href="javascript:void(0);"
+                  (click)="filterValue='All Triggers';onFilterd();">All
+                  Triggers</a>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  (click)="filterValue='Recently Viewed';onFilterd();">Recently Viewed</a>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  (click)="filterValue='Items I am following';onFilterd();">Items I am following</a>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  (click)="filterValue='Trigger added in the last 24 hours';onFilterd();">Triggers added in the last 24
+                  hours</a>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  (click)="filterValue='Triggers added in the last 7 days';onFilterd();">Triggers added in the last 7
+                  days</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto text-end">
+            <ul class="list-inline-item ps-0" >
+              
+                <li class="list-inline-item">
+              <a href="javascript:void(0);" class="btn btn-primary btn-sm me-1" data-bs-toggle="modal"
+              data-bs-target="#add_trigger"   (click)="resetform()" ><i class="feather icon-plus-circle me-1"></i> New Trigger</a>
+          </li>
+       </ul>                                    
+          </div>
+        </div>
+      </div>
+      <!-- /Page Header -->
+
+      <!-- Content Starts -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                <div class="table_header">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                      <div class="dataTables_length">
+                        <label>
+                          Show
+                          <select [(ngModel)]="pageSize" (ngModelChange)="PageSize()"
+                            class="form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                          entries
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="dataTables_filter">
+                            <label>
+                             
+                                <input  type="search" [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" placeholder="search..."
+                                   
+                                   class="form-control form-control-sm" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+              </div>
+                <table matSort (matSortChange)="sortData($event)"
+                  class="table table-striped table-nowrap custom-table mb-0 datatable dataTable no-footer">
+                  <thead>
+                    <tr>
+                      <th>
+                        Sno.
+                      </th>
+                        <th mat-sort-header="triggerName">Trigger Name </th>
+                      <th mat-sort-header="templateName">Templates</th>
+                      
+                      <th mat-sort-header="fromEmail">From Email</th>
+
+                     
+                      <th mat-sort-header="cronExpression">Cron Expression</th>
+
+                      <th mat-sort-header="emailTo">To Email</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let list of lstTrigger| paginate
+                    : {
+                        itemsPerPage: pageSize,
+                        currentPage: currentPage,
+                        totalItems: totalData
+                      };
+                let i = index">
+
+                      <td>{{i+1}} </td>
+                      <td>
+
+                        <a href="javascript:void(0);" data-bs-toggle="modal" (click)="edit(list)"
+                          data-bs-target="#system-user">{{ list.triggerName }}</a>
+                      </td>
+                      <td >{{ list.title }}</td>
+                      <td>{{ list.fromEmail }}</td>
+                      <td>{{ list.cronExpression }}</td>
+                      <td>
+                        <span  class="d-inline-block text-truncate" style="max-width: 100px;" data-placement="bottom" 
+                        matTooltip="{{list.emailTo}}" >{{list.emailTo}}</span>
+                      </td>
+                      <td class="text-center">
+                        <div class="dropdown dropdown-action">
+                          <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="material-icons" style="margin-left: 50%;">more_vert</i></a>
+                          <div class="dropdown-menu dropdown-menu-end">
+
+                            <a class="dropdown-item" data-bs-toggle="modal" (click)="updateEmailTrigger(list)"
+                              data-bs-target="#add_trigger">Edit This Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Change Email Image</a>
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete_Email"
+                            (click)="deleteTriggers(list.id)" >Delete This Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Clone This Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Change Record Owner</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Generate Merge Document</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Change Email To Lead</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Print This Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Email This Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Add New Task For Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Add New Event For Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Add Activity Set To Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Add New Deal For Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Add New Project For Email</a>
+
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table_footer">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info">
+                    Showing {{ serialNumberArray[0] }} to
+                    {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                    {{ lstTrigger.length }} entries
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"> </pagination-controls>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Content End -->
+    </div>
+    <!-- /Page Content -->
+  </div>
+  <!--modal section starts here-->
+
+ <!-- Trigger Modal -->
+<div class="modal  fade" id="add_trigger" tabindex="-1" role="dialog" aria-modal="true"
+data-bs-backdrop="static">
+<div class="modal-dialog" role="document">
+
+  <button type="button" class="close md-close" data-bs-dismiss="modal" aria-label="Close" #closebutton>
+
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <!--button-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title text-center">Schedule an Email Trigger</h4>
+      <button type="button" class="btn-close xs-close close-modal" data-bs-dismiss="modal" #closebutton   (click)="resetform()" aria-label="Close">  <span aria-hidden="true"></span></button>
+    </div>
+<!-- /Page Header -->
+
+<div class="modal-body">
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="emailTriggerForm" (ngSubmit)="updateEmailTrigger('')"  >
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label class="col-form-label">Email Trigger Name<span class="text-danger">*</span></label>
+          <input class="form-control" type="text" placeholder="Trigger Name" name="triggerName" [class.invalid]="
+          emailTriggerForm.get('triggerName ')?.invalid &&
+          emailTriggerForm.get('triggerName')?.touched
+            " formControlName="triggerName"  />
+          <div *ngIf="
+          emailTriggerForm.get('triggerName')?.invalid &&
+          emailTriggerForm.get('triggerName')?.touched
+            ">
+            <small *ngIf="
+            emailTriggerForm.get('triggerName')?.invalid &&
+            emailTriggerForm.get('triggerName')?.touched
+              " class="text-danger">
+              *Name is required</small>
+          </div>
+        </div>
+        
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label class="col-form-label">Templates<span class="text-danger" >*</span></label>
+
+
+          <select class="form-select" [class.invalid]="
+          emailTriggerForm.get('templateId ')?.invalid &&
+          emailTriggerForm.get('templateId')?.touched"  formControlName="templateId">
+
+            <option *ngFor="let option of template" [value]=" option.id">
+              {{ option.title }}
+            </option>
+          </select>
+          <div *ngIf="
+          emailTriggerForm.get('templateId')?.invalid &&
+          emailTriggerForm.get('templateId')?.touched
+        ">
+            <small *ngIf="
+            emailTriggerForm.get('templateId')?.invalid &&
+            emailTriggerForm.get('templateId')?.touched
+          " class="text-danger">
+              *Template is required</small>
+          </div>
+        </div>
+     </div>
+
+     <div class="form-group row">
+      <div class="col-md-12">
+        <label class="col-form-label">From Email<span class="text-danger">*</span></label>
+
+
+        <select class="form-select"[class.invalid]="
+        emailTriggerForm.get('fromEmail')?.invalid &&
+        emailTriggerForm.get('fromEmail')?.touched"  formControlName="fromEmail" (change)='getSignature($event)'
+
+      >   <option >
+            gopal.krishna@kloudping.com
+          </option>
+          <option >
+            sathish@kloudping.com
+          </option>
+          <option >
+            rajesh.kanna@kloudping.com
+          </option>
+        </select>
+        <div *ngIf="
+        emailTriggerForm.get('fromEmail')?.invalid &&
+        emailTriggerForm.get('fromEmail')?.touched
+      ">
+          <small *ngIf="
+          emailTriggerForm.get('fromEmail')?.invalid &&
+          emailTriggerForm.get('fromEmail')?.touched
+        " class="text-danger">
+            *From Email is required</small>
+        </div>
+      </div>
+   </div>
+   <div class="form-group row">
+    <div class="col-md-12">
+      <label class="col-form-label">Signature<span class="text-danger">*</span></label>
+
+
+      <select class="form-select"[class.invalid]="
+      emailTriggerForm.get('signatureName')?.invalid &&
+      emailTriggerForm.get('signatureName')?.touched"  formControlName="signatureName" 
+
+    >   <option *ngFor="let list of signature" >
+          {{list.signatureName}}
+        </option>
+     
+      </select>
+      <div *ngIf="
+      emailTriggerForm.get('signatureName')?.invalid &&
+      emailTriggerForm.get('signatureName')?.touched
+    ">
+        <small *ngIf="
+        emailTriggerForm.get('signatureName')?.invalid &&
+        emailTriggerForm.get('signatureName')?.touched
+      " class="text-danger">
+          * signatureName is required</small>
+      </div>
+    </div>
+ </div>
+   <div class="form-group row">
+    <div class="col-md-12">
+      <label class="col-form-label">Cron Expression &nbsp;  </label> <i data-bs-toggle="tooltip" title="feather-link" class="feather icon-link"></i> &nbsp;<a href="https://crontab.cronhub.io/" target="_blank">Generate the expression through online </a>
+
+      <input type="text" id="expression"  class="form-control" name="CronExpression" placeholder=" * * * * * " formControlName="cronExpression"  [class.invalid]="
+      emailTriggerForm.get('cronExpression ')?.invalid &&
+      emailTriggerForm.get('cronExpression')?.touched
+        "  />
+        <div *ngIf="
+        emailTriggerForm.get('cronExpression')?.invalid &&
+        emailTriggerForm.get('cronExpression')?.touched
+      ">
+          <small *ngIf="
+          emailTriggerForm.get('cronExpression')?.invalid &&
+          emailTriggerForm.get('cronExpression')?.touched
+        " class="text-danger">
+            *Cron Expression is required</small>
+        </div>
+    </div>
+  </div> 
+  <div class="form-group row">
+             <div class="col-lg-12 col-md-12">
+
+                  <div class="form-group tag_input">
+                      <mat-label>Email To</mat-label>
+                      <mat-form-field  appearance="fill">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let item of emailto"
+                            (removed)="remove(item,emailto)"
+                          >
+                            {{ item }}
+                            <button matChipRemove>
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                          </mat-chip>
+                          <input
+                            placeholder="Enter Mail id ..."
+                            [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            formControlName="emailTo" 
+                            [matChipInputAddOnBlur]="true"
+                            (matChipInputTokenEnd)="add($event,emailto)"
+                            [class.invalid]="
+                            emailTriggerForm.get('emailTo ')?.invalid &&
+                            emailTriggerForm.get('emailTo')?.touched"
+                          />
+                          
+                        </mat-chip-list>
+                      </mat-form-field>
+
+                  </div>      
+                  <div class="form-group">                       
+                        <div class="col-xl-6">
+                      <label class="col-form-label">Email Monitor</label>
+                      <div class="status-toggle ">
+                        <input id="rating_6" class="check" type="checkbox"    formControlName="emailMonitor"/>
+                        <label for="rating_6" class="checktoggle checkbox-bg">checkbox</label>
+                      </div>
+                  </div>
+                  </div>   
+
+            </div>
+            <div class="text-center py-3">
+              <button type="button" class="border-0 btn btn-primary btn-gradient-primary btn-rounded submit-btn"
+                type="submit" [disabled]="!emailTriggerForm.valid">
+                Save</button>&nbsp;&nbsp;
+
+                <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal" >
+                Cancel
+              </button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- modal-content -->
+  </div>
+  <!-- modal-dialog -->
+</div>
+
+   <!-- Trigger modal End -->
+  
+
+     <!-- Delete Trigger Modal  -->
+  <div class="modal custom-modal fade" id="delete_Email" role="dialog" data-bs-backdrop='static'>
+  
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="form-header">
+            <h3>Delete Email</h3>
+            <p>Are you sure want to delete?</p>
+          </div>
+          <div class="modal-btn delete-action">
+            <div class="row">
+              <div class="col-6">
+                <a (click)="deleteTriggers('')" class="btn btn-primary continue-btn">Delete</a>
+              </div>
+              <div class="col-6">
+                <a href="javascript:void(0);" data-bs-dismiss="modal" #deleteclosebutton
+                  class="btn btn-primary cancel-btn">Cancel</a>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>

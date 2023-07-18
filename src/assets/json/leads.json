@@ -1,0 +1,96 @@
+{
+    "data" :   [
+        {
+          "id": 1,
+          "symbol": "A",
+          "fullname": "Anne Lynch",
+          "title": "VP of Sales",
+          "company": "Umbrella",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color1"
+        },
+         {
+          "id": 2,
+          "symbol": "B",
+          "fullname": "Benneth",
+          "title": "VP of Sales",
+          "company": "Acme Corporation",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color2"
+        },
+         {
+          "id": 3,
+          "symbol": "C",
+          "fullname": "Cravo",
+          "title": "VP of Sales",
+          "company": "Acme Corporation",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color3"
+        },
+         {
+          "id": 4,
+          "symbol": "C",
+          "fullname": "Cravo",
+          "title": "VP of Sales",
+          "company": "Soylent Corp",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color3"
+        },
+         {
+          "id": 5,
+          "symbol": "D",
+          "fullname": "Des Ignayshun",
+          "title": "VP of Sales",
+          "company": "Howe-Blanda LLC",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color4"
+        },
+        {
+          "id": 6,
+          "symbol": "J",
+          "fullname": "Jen Tile",
+          "title": "VP of Sales",
+          "company": "Howe-Blanda LLC",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "John Doe",
+          "changeColor": "color5"
+        },
+        {
+          "id": 7,
+          "symbol": "J",
+          "fullname": "Jacob",
+          "title": "Sales",
+          "company": "Blanda",
+          "phone": "(406) 653-3860",
+          "emailaddress": "abc@gmail.com",
+          "leadstatus": "OPEN-NotContacted",
+          "leadcreated": "03-Jun-20 1:14 AM",
+          "leadowner": "Anderson",
+          "changeColor": "color5"
+        }
+      ],
+      "totalData":7
+}

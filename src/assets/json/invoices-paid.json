@@ -1,0 +1,50 @@
+{
+    "data" :  [
+        {
+          "invoiceId": "IN093439#@09",
+          "category": "Software",
+          "createdOn": "16 June 2022",
+          "invoiceto": "Barbara Moore",
+          "amount":"$5200",
+          "paidOn":"23 June 2022",
+          "status":"Paid"
+        },
+        {
+          "invoiceId": "IN093439#@10",
+          "category": "Food",
+          "createdOn": "18 June 2022",
+          "invoiceto": "Karlene Chaidez",
+          "amount":"$3800",
+          "paidOn":"24 June 2022",
+          "status":"Paid"
+        },
+        {
+          "invoiceId": "IN093439#@11",
+          "category": "Marketing",
+          "createdOn": "20 June 2022",
+          "invoiceto": "Russell Copeland",
+          "amount":"$1800",
+          "paidOn":"26 June 2022",
+          "status":"Paid"
+        },
+        {
+          "invoiceId": "IN093439#@12",
+          "category": "Repairs",
+          "createdOn": "21 June 2022",
+          "invoiceto": "Joseph Collins",
+          "amount":"$4800",
+          "paidOn":"28 June 2022",
+          "status":"Paid"
+        },
+        {
+          "invoiceId": "IN093439#@13",
+          "category": "Software",
+          "createdOn": "23 June 2022",
+          "invoiceto": "Jennifer Floyd",
+          "amount":"$6200",
+          "paidOn":"30 June 2022",
+          "status":"Paid"
+        }
+      ],
+      "totalData":5
+}

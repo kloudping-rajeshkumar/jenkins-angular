@@ -1,0 +1,26 @@
+.example-chip-list {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 0;
+    box-shadow: unset;
+    min-height: 44px;
+  }
+ 
+  .mat-chip.mat-standard-chip {
+    background-color: #9a55ff !important;
+    color: #fff;
+    margin: 0px 5px 0px 0px;
+  }
+  .mat-standard-chip {
+    border-radius: 0.25rem;
+  }
+  .mat-icon {
+    color: #fff;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 6px 6px 0 !important;
+  }
+  .mat-form-field {
+    display: block;
+}

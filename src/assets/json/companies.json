@@ -1,0 +1,75 @@
+{
+    "data" : [
+        {
+          "id": 1,
+          "company": "Clampett Oil and Gas Corp.",
+          "phone": "8754554531",
+          "billingstreet": "Escalon Street",
+          "billingcity": "Palo Alto",
+          "billingstate": "CA",
+          "billingcountry": "United States",
+          "img": "assets/img/c-logo2.png"
+        },
+         {
+          "id": 2,
+          "company": "Acme Corporation",
+          "phone": "8754554531",
+          "billingstreet": "1000 Escalon Street",
+          "billingcity": "Palo Alto",
+          "billingstate": "CA",
+          "billingcountry": "USA",
+          "img": "assets/img/c-logo.png"
+        },
+         {
+          "id": 3,
+          "company": "Soylent Corp",
+          "phone": "8754554531",
+          "billingstreet": "Havier Street",
+          "billingcity": "Soylent Corp",
+          "billingstate": "CA",
+          "billingcountry": "India",
+          "img": "assets/img/c-logo3.png"
+        },
+         {
+          "id": 4,
+          "company": "umbrella",
+          "phone": "8754554531",
+          "billingstreet": "1000 Escalon Street",
+          "billingcity": "Umbrella",
+          "billingstate": "CA",
+          "billingcountry": "Europe",
+          "img": "assets/img/c-logo2.png"
+        },
+         {
+          "id": 5,
+          "company": "Clampett Oil and Gas Corp.",
+          "phone": "8754554531",
+          "billingstreet": "Nephew Street",
+          "billingcity": "Palo Alto",
+          "billingstate": "CA",
+          "billingcountry": "United States",
+          "img": "assets/img/c-logo.png"
+        },
+        {
+          "id": 6,
+          "company": "Silicon Valley",
+          "phone": "8754554531",
+          "billingstreet": "Albert Street",
+          "billingcity": "Palo Alto",
+          "billingstate": "-",
+          "billingcountry": "India",
+          "img": "assets/img/c-logo2.png"
+        },
+        {
+          "id": 7,
+          "company": "Fringe",
+          "phone": "8754554531",
+          "billingstreet": "RVN Road",
+          "billingcity": "Umbrella",
+          "billingstate": "CA",
+          "billingcountry": "USA",
+          "img": "assets/img/c-logo3.png"
+        }
+      ],
+      "totalData":7
+}

@@ -1,0 +1,257 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="crms-title row bg-white">
+            <div class="col">
+              <h3 class="page-title m-0">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="feather icon-smartphone"></i>
+                </span>
+                Quick Email Trigger
+              </h3>
+            </div>
+            <div class="col text-end">
+              <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+                <li class="breadcrumb-item">
+                  <a [routerLink]="routes.dealsDashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Emails / Quick Email Trigger</li>
+              </ul>
+            </div>
+          </div>
+    <!-- /Page Header -->
+         <!-- Page Header -->
+        <div class="page-header pt-3 mb-0">
+            <div class="row">
+              <div class="col">
+            
+              </div>
+              <div class="col text-end">
+                
+              </div>
+            </div>
+          </div>
+        <!-- /Page Header -->           
+
+<!--Queue Trigger Modal -->                                   
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card invoices-add-card">
+      <div class="card-body">
+          <div class="bank-inner-details">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form [formGroup]="quickEmailForm" (ngSubmit)="queueEmailtrigger()">
+          <div class="form-group row">
+              <div class="col-md-6">
+                <label class="col-form-label">Templates<span class="text-danger">*</span></label>
+
+                <select class="form-select" formControlName="templateId" [class.invalid]="
+                quickEmailForm.get('templateId')?.invalid &&
+                quickEmailForm.get('templateId')?.touched"   
+              
+              >
+                  
+                  <option *ngFor="let option of template" [value]=" option.id">
+                    {{ option.title }}
+                  </option>
+                </select>
+                <div *ngIf="
+              quickEmailForm.get('templateId')?.invalid &&
+              quickEmailForm.get('templateId')?.touched
+            ">
+                <small *ngIf="
+                quickEmailForm.get('templateId')?.invalid &&
+                quickEmailForm.get('templateId')?.touched
+              " class="text-danger">
+                  *Template is required</small>
+              </div>
+              </div>
+              <div class="col-md-6">
+              <label class="col-form-label">From Email<span class="text-danger">*</span></label>
+
+
+              <select class="form-select" [class.invalid]="
+              quickEmailForm.get('fromEmail')?.invalid &&
+              quickEmailForm.get('fromEmail')?.touched"  formControlName="fromEmail" 
+
+            >   <option >
+                   gopal.krishna@kloudping.com
+                 </option>
+                 <option >
+                   sathish@kloudping.com
+                 </option>
+                 <option >
+                   rajesh.kanna@kloudping.com
+                 </option>
+              </select>
+
+              <div *ngIf="
+              quickEmailForm.get('fromEmail')?.invalid &&
+              quickEmailForm.get('fromEmail')?.touched
+            ">
+                <small *ngIf="
+                quickEmailForm.get('fromEmail')?.invalid &&
+                quickEmailForm.get('fromEmail')?.touched
+              " class="text-danger">
+                  *From Email is required</small>
+              </div>
+
+            </div>
+           </div>
+          <div class=" row">
+           <div class="col-lg-12 col-md-12">
+            <div class="form-group tag_input">
+            <mat-label>Email To</mat-label>
+                 <mat-form-field  appearance="fill">
+                   <mat-chip-list #chipList1>
+                     <mat-chip
+                       *ngFor="let item of emailto"
+                       (removed)="remove(item,emailto)"
+                     >
+                       {{ item }}
+                       <button matChipRemove>
+                         <mat-icon>cancel</mat-icon>
+                       </button>
+                     </mat-chip>
+                     <input
+                       placeholder="Enter Mail id.."
+                       [matChipInputFor]="chipList1"
+                       formControlName="emailTo" 
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="true"
+                       (matChipInputTokenEnd)="add($event,emailto)"
+                       [class.invalid]="
+                       quickEmailForm.get('emailTo ')?.invalid &&
+                       quickEmailForm.get('emailTo')?.touched"
+                     />
+                   </mat-chip-list>
+                 </mat-form-field>
+           </div>
+           </div>
+            <div class="col-lg-6 col-md-6">
+            <div class=" tag_input">
+            <mat-label>Email Cc</mat-label>
+                 <mat-form-field  appearance="fill">
+                   <mat-chip-list #chipList2>
+                     <mat-chip
+                       *ngFor="let item of emailcc"
+                       (removed)="remove(item,emailcc)"
+                     >
+                       {{ item }}
+                       <button matChipRemove>
+                         <mat-icon>cancel</mat-icon>
+                       </button>
+                     </mat-chip>
+                     <input
+                       placeholder="Enter Mail id.."
+                       [matChipInputFor]="chipList2"
+                       formControlName="emailCc" 
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="true"
+                       (matChipInputTokenEnd)="add($event,emailcc)"
+                       [class.invalid]="
+                       quickEmailForm.get('emailCc ')?.invalid &&
+                       quickEmailForm.get('emailCc')?.touched"
+                     />
+                   </mat-chip-list>
+                 </mat-form-field>
+           </div>
+           </div>
+           <div class="col-lg-6 col-md-6">
+            <div class=" tag_input">
+              <mat-label>Email Bcc</mat-label>
+                 <mat-form-field  appearance="fill">
+                   <mat-chip-list #chipList3>
+                     <mat-chip
+                       *ngFor="let item of emailbcc"
+                       (removed)="remove(item,emailbcc)"
+                     >
+                       {{ item }}
+                       <button matChipRemove>
+                         <mat-icon>cancel</mat-icon>
+                       </button>
+                     </mat-chip>
+                     <input
+                       placeholder="Enter Mail id.."
+                       [matChipInputFor]="chipList3"
+                       formControlName="emailBcc" 
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="true"
+                       (matChipInputTokenEnd)="add($event,emailbcc)"
+                       [class.invalid]="
+                       quickEmailForm.get('emailBcc ')?.invalid &&
+                       quickEmailForm.get('emailBcc')?.touched"
+                     />
+                   </mat-chip-list>
+                 </mat-form-field>
+            </div>
+           </div>
+          </div>
+         
+           <div class=" row">
+            <div class="col-lg-12 col-md-12">
+                                
+                                    <label>Body</label>
+                                    <angular-editor [placeholder]="'Enter text here...'" formControlName="body" [class.invalid]="
+                                    quickEmailForm.get('body ')?.invalid &&
+                                    quickEmailForm.get('body')?.touched
+                                      " [config]="config"></angular-editor>
+                                    
+                                
+                                <div *ngIf="
+                                quickEmailForm.get('body')?.invalid &&
+                                quickEmailForm.get('body')?.touched
+                                  ">
+                                  <small *ngIf="
+                                  quickEmailForm.get('body')?.invalid &&
+                                  quickEmailForm.get('body')?.touched
+                                    " class="text-danger">
+                                    *Body is required</small>
+                                </div>
+              </div>
+           </div>
+           <div class=" row">
+             <div class="col-xl-3">
+               <label class="col-form-label">Save To SentEmail</label>
+               <div class="status-toggle">
+                <input id="rating_5" class="check" type="checkbox"    formControlName="saveToSendItems"/>
+                <label for="rating_5" class="checktoggle checkbox-bg">checkbox</label>
+               </div>
+             </div>
+                <div class="col-xl-3">
+                 <label class="col-form-label">Email Monitor</label>
+                 <div class="status-toggle ">
+                   <input id="rating_6" class="check" type="checkbox"    formControlName="emailMonitor"/>
+                   <label for="rating_6" class="checktoggle checkbox-bg">checkbox</label>
+                 </div>
+             </div>
+           </div>
+            <div class="text-center py-3">
+              <button type="button" class="border-0 btn btn-primary btn-gradient-primary btn-rounded submit-btn"
+                type="submit" [disabled]="!quickEmailForm.valid">
+                Send</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal"   (click)="resetform()"> 
+                Reset
+                 </button>
+            </div>
+          </form>
+        </div>
+       
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+</div>
+</div>
+     <!-- modal-content -->
+ </div>
+     <!-- modal-dialog -->
+</div>
+  <!-- Queue Trigger modal End -->

@@ -1,0 +1,114 @@
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="crms-title row bg-white mb-4">
+            <div class="col">
+                <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="fa fa-cog"></i>
+                </span> <span>Settings</span></h3>
+            </div>
+            <div class="col text-end">
+                <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
+                    <li class="breadcrumb-item"><a [routerLink]="routes.dealsDashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Settings</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="settings-menu-links">
+            <ul class="nav nav-tabs menu-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.generalSettings">General Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.localization">Localization</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.paymentSettings">Payment Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.emailSettings">Email Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.socialSettings">Social Media Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.socialLinks">Social Links</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="routes.seoSettings">SEO Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="routes.othersSettings">Others</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">SEO Settings</h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <form>
+                            <div class="settings-form">
+                                <div class="form-group form-placeholder">
+                                    <label>Meta Title <span class="star-red">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group meta_keyword">
+                                    <label>Meta Keywords <span class="star-red">*</span></label>
+                
+                                    <mat-form-field>
+                                      <mat-chip-list #chipList aria-label="Fruit selection">
+                                        <mat-chip
+                                          *ngFor="let Keyword of Keyword"
+                                          (removed)="remove(Keyword)"
+                                        >
+                                          {{ Keyword }}
+                                          <button matChipRemove>
+                                            <mat-icon>close</mat-icon>
+                                          </button>
+                                        </mat-chip>
+                                        <input
+                                          #fruitInput
+                                          [formControl]="fruitCtrl"
+                                          [matAutocomplete]="auto"
+                                          [matChipInputFor]="chipList"
+                                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                          (matChipInputTokenEnd)="add($event)"
+                                        />
+                                      </mat-chip-list>
+                                      <mat-autocomplete
+                                        #auto="matAutocomplete"
+                                        (optionSelected)="selected($event)"
+                                      >
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                    <!-- <label>Meta Keywords <span class="star-red">*</span></label> -->
+                                    <!-- <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Meta Keywords" name="services" value="Lorem,Ipsum" id="services"> -->
+                                  </div>
+                                <div class="form-group">
+                                    <label>Meta Description <span class="star-red">*</span></label>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="settings-btns">
+                                        <button type="submit" class="border-0 btn btn-primary btn-gradient-primary btn-rounded">Submit</button>
+                                        <button type="submit" class="btn btn-secondary btn-rounded ms-2">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    
+</div>

@@ -1,0 +1,55 @@
+{
+    "data" : [
+        {
+          "invoiceId": " IN093439#@09",
+          "createdOn": "16 June 2022",
+          "invoiceto": "Barbara Moore",
+          "amount":"$5200",
+          "lastInvoice":"23 June 2022",
+          "nextInvoice":"28 June 2022",
+          "frequency": "14 Months",
+          "status":"Active"
+        },
+        {
+          "invoiceId": " IN093439#@10",
+          "createdOn": "18 June 2022",
+          "invoiceto": "Karlene Chaidez",
+          "amount":"$3800",
+          "lastInvoice":"18 June 2022",
+          "nextInvoice":"20 June 2022",
+          "frequency": "12 Months",
+          "status":"Expired"
+        },
+        {
+          "invoiceId": " IN093439#@11",
+          "createdOn": "20 June 2022",
+          "invoiceto": "Russell Copeland",
+          "amount":"$1800",
+          "lastInvoice":"10 June 2022",
+          "nextInvoice":"18 June 2022",
+          "frequency": "08 Months",
+          "status":"Active"
+        },
+        {
+          "invoiceId": " IN093439#@12",
+          "createdOn": "21 June 2022",
+          "invoiceto": "Joseph Collins",
+          "amount":"$4800",
+          "lastInvoice":"15 June 2022",
+          "nextInvoice":"22 June 2022",
+          "frequency": "10 Months",
+          "status":"Expired"
+        },
+        {
+          "invoiceId": " IN093439#@13",
+          "createdOn": "23 June 2022",
+          "invoiceto": "Jennifer Floyd",
+          "amount":"$6200",
+          "lastInvoice":"20 June 2022",
+          "nextInvoice":"24 June 2022",
+          "frequency": "04 Months",
+          "status":"Active"
+        }
+      ],
+      "totalData":5
+}
